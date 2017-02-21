@@ -16,7 +16,7 @@ static PyObject * myextention_isprime(PyObject *self, PyObject *args){
             break;
         }
     }
-    return Py_BuildValue("p", flag);
+    return Py_BuildValue("i", flag);
 }
 
 static PyMethodDef myextension_methods[] = {
