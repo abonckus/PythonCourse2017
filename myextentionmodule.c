@@ -19,9 +19,8 @@ static PyObject * myextention_isprime(PyObject *self, PyObject *args){
     return Py_BuildValue("p", flag);
 }
 
-static PyMethodDef myextensionMethods[] = {
-    {"isprime", myextention_isprime, METH_VARARGS, "Check if number is prime."},
-    {NULL, NULL, o, NULL}
+static struct PyMethodDef myextensionMethods[] = {
+    {"isprime", myextention_isprime, METH_VARARGS, "Check if number is prime."}
 };
 
 static struct PyModuleDef myextensionmodule = {
@@ -33,5 +32,5 @@ static struct PyModuleDef myextensionmodule = {
 };
 
 PyMODINIT_FUNC PyInit_myextention(void){
-    return PyModule_Create(&myextentionmodule);
+    return PyModule_Create(&myextensionmodule);
 }
