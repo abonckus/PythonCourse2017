@@ -19,7 +19,7 @@ static PyObject * myextention_isprime(PyObject *self, PyObject *args){
     return Py_BuildValue("p", flag);
 }
 
-static struct PyMethodDef myextensionMethods[] = {
+static PyMethodDef myextension_methods[] = {
     {"isprime", myextention_isprime, METH_VARARGS, "Check if number is prime."}
 };
 
