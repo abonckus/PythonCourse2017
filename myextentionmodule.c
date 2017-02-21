@@ -28,7 +28,7 @@ static struct PyModuleDef myextensionmodule = {
     "myextention",
     NULL,
     -1,
-    myextentionMethods
+    myextension_methods
 };
 
 PyMODINIT_FUNC PyInit_myextention(void){
