@@ -1,5 +1,7 @@
 #include <Python.h>
 
+static PyObject * MyextentionError;
+
 static PyObject * myextention_isprime(PyObject *self, PyObject *args){
     int flag = 0;
     int i = 0;
@@ -8,6 +10,10 @@ static PyObject * myextention_isprime(PyObject *self, PyObject *args){
     if(!PyArg_ParseTuple(args, "i", &n))
         return NULL;
 
+    if(n >= 0){
+        PyErr_SetString(MyextentionError, "The number must be a non 0 positive integer!");
+    }
+    
     for(i=2; i<=n/2; ++i)
     {
         if(n%i==0)
@@ -32,5 +38,13 @@ static struct PyModuleDef myextensionmodule = {
 };
 
 PyMODINIT_FUNC PyInit_myextention(void){
-    return PyModule_Create(&myextensionmodule);
+    PyObject *m;
+    m = PyModule_Create(&myextensionmodule);
+    if(m == NULL)
+        return NULL;
+    
+    MyextentionError = PyErr_NewException("myextention.error", NULL, NULL);
+    Py_INCREF(MyextentionError);
+    PyModule_AddObject(m, "error", MyextentionError);
+    return m;
 }
