@@ -1,19 +1,5 @@
 #include <Python.h>
 
-typedef struct {
-	PyObject_HEAD	
-} myextension_PersonObject;
-
-static PyTypeObject myextension_PersonType = {
-	PyVarObject_HEAD_INIT(NULL, 0),
-	"myextension.Person",				/* tp_name */
-	sizeof(myextension_PersonObject),	/* tp_basicsize */
-	0,									/* tp_itemsize */
-	0,									/* tp_dealloc */
-	0,									/* tp_print  */
-	0,									/* tp_getattr */
-}
-
 static PyObject * MyextentionError;
 
 static PyObject * myextention_isprime(PyObject *self, PyObject *args){
