@@ -1,8 +1,8 @@
 from distutils.core import setup
 from distutils.core import Extension
 
-MOD = "myextension"
+MOD = "myextention"
 
-module = Extension(MOD, sources = ["myextensionmodule.c"])
+module = Extension(MOD, sources = ["myextentionmodule.c"])
 
 setup(name = MOD, ext_modules = [module])
