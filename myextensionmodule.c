@@ -1,8 +1,8 @@
 #include <Python.h>
 
-static PyObject * MyextentionError;
+static PyObject * myextensionError;
 
-static PyObject * myextention_isprime(PyObject *self, PyObject *args){
+static PyObject * myextension_isprime(PyObject *self, PyObject *args){
     int flag = 0;
     int i = 0;
     int n = 0;
@@ -11,7 +11,7 @@ static PyObject * myextention_isprime(PyObject *self, PyObject *args){
         return NULL;
 
     if(n >= 0){
-        PyErr_SetString(MyextentionError, "The number must be a non 0 positive integer!");
+        PyErr_SetString(myextensionError, "The number must be a non 0 positive integer!");
     }
     
     for(i=2; i<=n/2; ++i)
@@ -26,25 +26,25 @@ static PyObject * myextention_isprime(PyObject *self, PyObject *args){
 }
 
 static PyMethodDef myextension_methods[] = {
-    {"isprime", myextention_isprime, METH_VARARGS, "Check if number is prime."}
+    {"isprime", myextension_isprime, METH_VARARGS, "Check if number is prime."}
 };
 
 static struct PyModuleDef myextensionmodule = {
     PyModuleDef_HEAD_INIT,
-    "myextention",
+    "myextension",
     NULL,
     -1,
     myextension_methods
 };
 
-PyMODINIT_FUNC PyInit_myextention(void){
+PyMODINIT_FUNC PyInit_myextension(void){
     PyObject *m;
     m = PyModule_Create(&myextensionmodule);
     if(m == NULL)
         return NULL;
     
-    MyextentionError = PyErr_NewException("myextention.error", NULL, NULL);
-    Py_INCREF(MyextentionError);
-    PyModule_AddObject(m, "error", MyextentionError);
+    myextensionError = PyErr_NewException("myextension.error", NULL, NULL);
+    Py_INCREF(myextensionError);
+    PyModule_AddObject(m, "error", myextensionError);
     return m;
 }

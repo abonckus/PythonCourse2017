@@ -1,8 +1,8 @@
-import myextention
+import myextension
 
 n = int(input())
 
-if myextention.isprime(n):
+if myextension.isprime(n):
 	print(str(n)+' is not prime.')
 else:
 	print(str(n)+' is prime.')
