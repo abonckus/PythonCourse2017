@@ -10,7 +10,7 @@ static PyObject * myextension_isprime(PyObject *self, PyObject *args){
     if(!PyArg_ParseTuple(args, "i", &n))
         return NULL;
 
-    if(n >= 0){
+    if(n <= 0){
         PyErr_SetString(myextensionError, "The number must be a non 0 positive integer!");
     }
     
