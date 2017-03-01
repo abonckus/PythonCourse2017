@@ -147,6 +147,7 @@ static PyObject * myextension_isprime(PyObject *self, PyObject *args){
 
     if(n <= 0){
         PyErr_SetString(myextensionError, "The number must be a non 0 positive integer!");
+        return NULL;
     }
     
     for(i=2; i<=n/2; ++i)
