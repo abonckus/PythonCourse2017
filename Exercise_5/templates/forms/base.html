@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Materialinių vertybių nurašymas</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://bootswatch.com/simplex/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="container container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Materialinių vertybių nurašymas</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a href="base.html">Home</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="documents">Pirkimo dokumentai</a></li>
+                    {% endif %}
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if user.is_authenticated %}
+                        <li><a href="logout">Logout</a></li>
+                    {% else %}
+                        <li><a href="login">Login</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+        <div class="container">
+            <h2 class="text-center">
+                {% block title %}
+                {% endblock %}
+            </h2>
+            {% block content %}
+            {% endblock %}
+        </div>
+    </body>
+</html>

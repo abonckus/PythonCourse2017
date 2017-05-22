@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        @page {
+            size: {{ pagesize }};
+            margin: 2cm;
+            font-size: 24px;
+        }
+
+        body {
+            font-size: 150%;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        body div.order{
+
+        }
+
+        div.order{
+            width: 20%;
+            font-size: 80%;
+            text-align: left;
+            margin-bottom: 5px;
+        }
+
+        p {
+            text-indent: 50px;
+            text-align: justify;
+        }
+
+        table {
+            font-size: 90%;
+            border: 1px solid;
+            border-collapse: collapse;
+        }
+        th, td {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="order">
+        Patvirtinta {{ settings.company_name }} direktoriaus<br>
+        {{ document.created_date }} isakymu Nr. 69
+    </div>
+    <div class="order">
+        <b>TVIRTINU:</b><br>
+        {{ settings.company_name }} direktorius<br>
+        {{ document.created_date|date:"Y" }} m. {{ document.created_date|date:"m" }} men. {{ document.created_date|date:"d" }} d
+    </div>
+    <h1>{{ settings.company_name }}</h1>
+    <h1>MATERIALINIU VERTYBIU NURASYMO AKTAS</h1>
+    <p>
+        Komisija patvirtinta {{ document.created_date|date:"Y" }} m. {{ document.created_date|date:"m" }} men. {{ document.created_date|date:"d" }} d. isakymu Nr. 69 "Del
+        komisijos sudarymo materialiniu vertybiu nurasymui", komisijos pirmininkas
+        {% for member in members %}
+            {{ member.first_name }} {{ member.last_name }} - {{ member.position }}{% if forloop.counter != members.count %}, {% endif %}
+        {% endfor %}
+        nustate, kad per {{ document.created_date|date:"Y" }} m.
+        {{ document.created_date|date:"m" }} men. [NURODOMA VIETA] sunaudojo:
+    </p>
+    <table>
+        <thead style="margin-bottom: 10px">
+            <tr>
+                <th>Eil. Nr.</th>
+                <th>Materialines vertybes pavadinimas</th>
+                <th>Mato vnt.</th>
+                <th>Kiekis</th>
+                <th>Kaina</th>
+                <th>Suma su PVM EUR</th>
+                <th>Panaudojimo tikslas ir vieta</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.unit_of_measure }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.price }}</td>
+                    <td>{% widthratio item.price 1 item.quantity %}</td>
+                    <td>{{ item.purpose }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <hr>
+    <table>
+        <tbody>
+            <tr>
+                <td></td>
+                <td style="text-align: right"><b>Is viso:</b></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>[SUM]</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    <div style="margin-top: 10px; margin-bottom: 10px">
+        Pagal pirkimo dokumentus :
+        {{ document.seller }} PVM s.f. {{ document.series }} Nr. {{ document.number }}, {{ document.created_date }} ;
+    </div>
+    <table>
+        <tbody>
+            {% for member in members %}
+                <tr>
+                <td style="width: 100%">
+                    {% if forloop.counter == 1 %}Komisijos pirmininkas{% endif %}
+                    {% if forloop.counter == 2 %}Nariai{% endif %}
+                </td>
+                <td>
+                    <u style="margin-left: 10px">{{ member.first_name }} {{ member.last_name }}</u><br>
+                </td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td style="width: 100%">Mat. atsakingas</td>
+                <td>{{ user.first_name }} {{ user.last_name }}</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

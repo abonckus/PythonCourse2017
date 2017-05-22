@@ -1,0 +1,50 @@
+{% extends 'forms/base.html' %}
+
+{% block title %}
+    Pirkimo dokumentai
+{% endblock %}
+
+{% block content %}
+    <table class="table table-hover ">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Pardavėjas</th>
+                <th>Sukūrimo data</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if documents %}
+                {% for document in documents %}
+                <tr>
+                    <td>{{ document.series }}{{ document.number }}</td>
+                    <td>{{ document.seller }}</td>
+                    <td>{{ document.created_date }}</td>
+                    <td>
+                        <a href="get_pdf/{{ document.number }}" class="btn btn-default btn-xs">
+                            <span class="glyphicon glyphicon-print"></span>
+                        </a>
+                        <td><a href="items/{{ document.series }}/{{ document.number }}"><span class="glyphicon glyphicon-edit"></span></a></td>
+                    </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <p>Dokumentų nėra</p>
+            {% endif %}
+        </tbody>
+    </table>
+    <a class="btn btn-primary" href="new_document">Naujas dokumentas</a>
+    <script>
+    $(document).ready(function() {
+
+        $('tr').click(function() {
+            var href = $(this).find("a").attr("href");
+            if(href) {
+                window.location = href;
+            }
+        });
+
+    });
+    </script>
+{% endblock %}
